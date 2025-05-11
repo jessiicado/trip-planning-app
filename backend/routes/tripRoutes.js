@@ -1,3 +1,4 @@
+//tripRoutes.js
 const express = require("express");
 const router = express.Router();
 
@@ -15,6 +16,6 @@ router.post("/", createTrip);
 // @route PUT /api/trips/:id
 router.put("/:id", updateTrip);
 // @route DELETE /api/trips/:id
-router.put("/:id", deleteTrip);
+router.delete("/delete:id", deleteTrip);
 
 module.exports = router;

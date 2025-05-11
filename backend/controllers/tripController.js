@@ -1,7 +1,7 @@
 // backend/controllers/tripController.js
 const Trip = require("../models/Trip");
 
-const getTrips = async (req, res) => {
+const getTrip = async (req, res) => {
   try {
     const trips = await Trip.find();
     res.json(trips);
@@ -50,7 +50,7 @@ const deleteTrip = async (req, res) => {
 };
 
 module.exports = {
-  getTrips,
+  getTrip,
   createTrip,
   updateTrip,
   deleteTrip,
