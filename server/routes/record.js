@@ -7,7 +7,7 @@ import { ObjectId } from "mongodb";
 const router = express.Router();
 // Get all records
 
-router.get("/", async (req, res) => {
+router.get("/alltrips", async (req, res) => {
   let collection = await db.collection("records");
   let results = await collection.find({}).toArray();
   res.status(200).send(results);
@@ -22,7 +22,7 @@ router.get("/:id", async (req, res) => {
   else res.status(200).send(result);
 });
 
-router.post("/", async (req, res) => {
+router.post("/createtrip", async (req, res) => {
   try {
     let newDocument = {
       name: req.body.name,
