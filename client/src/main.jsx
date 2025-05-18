@@ -6,36 +6,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Record from "./components/Record.jsx";
 import RecordList from "./components/RecordList.jsx";
 import "./index.css";
-
+import Home from "./components/Home.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      {
-        path: "/",
-        element: <RecordList />,
-      },
-    ],
-  },
-  {
-    path: "/edit/:id",
-    element: <App />,
-    children: [
-      {
-        path: "/edit/:id",
-        element: <Record />,
-      },
-    ],
-  },
-  {
-    path: "/create",
-    element: <App />,
-    children: [
-      {
-        path: "/create",
-        element: <Record />,
-      },
+      { index: true, element: <Home /> }, // default child route for "/"
+      { path: "record", element: <RecordList /> }, // path = /record
+      { path: "record/edit/:id", element: <Record /> }, // path = /record/edit/:id
+      { path: "create", element: <Record /> }, // path = /create
     ],
   },
 ]);
@@ -45,3 +25,42 @@ createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </StrictMode>
 );
+
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App />,
+//     children: [
+//       {
+//         path: "/",
+//         element: <RecordList />,
+//       },
+//     ],
+//   },
+//   {
+//     path: "/edit/:id",
+//     element: <App />,
+//     children: [
+//       {
+//         path: "/edit/:id",
+//         element: <Record />,
+//       },
+//     ],
+//   },
+//   {
+//     path: "/create",
+//     element: <App />,
+//     children: [
+//       {
+//         path: "/create",
+//         element: <Record />,
+//       },
+//     ],
+//   },
+// ]);
+
+// createRoot(document.getElementById("root")).render(
+//   <StrictMode>
+//     <RouterProvider router={router} />
+//   </StrictMode>
+// );
