@@ -62,7 +62,7 @@ export default function Navbar() {
             <NavLink to="/explore" className="hover:text-gray-700">
               Explore
             </NavLink>
-            <NavLink to="/record" className="hover:text-gray-700">
+            <NavLink to="/trip" className="hover:text-gray-700">
               All Trips
             </NavLink>
             <div className="flex gap-2">
@@ -94,7 +94,7 @@ export default function Navbar() {
           <li>
             <NavLink
               className="block py-2 px-4 hover:bg-gray-200 rounded"
-              to="/record"
+              to="/trip"
             >
               All Trips
             </NavLink>

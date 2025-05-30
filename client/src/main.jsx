@@ -13,9 +13,9 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> }, // default child route for "/"
-      { path: "record", element: <RecordList /> }, // path = /record
-      { path: "record/edit/:id", element: <Record /> }, // path = /record/edit/:id
-      { path: "create", element: <Record /> }, // path = /create
+      { path: "/trip", element: <RecordList /> }, // path = /record
+      { path: "/trip/edit/:id", element: <Record /> }, // path = /record/edit/:id
+      { path: "/create", element: <Record /> }, // path = /create
     ],
   },
 ]);

@@ -1,17 +1,26 @@
-// backend/models/Trip.js
-//creates a trip model
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const tripSchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
       trim: true,
     },
-    completed: {
-      type: Boolean,
-      default: false,
+    destination: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    startDate: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    endDate: {
+      type: String,
+      required: true,
+      trim: true,
     },
   },
   {
@@ -21,4 +30,4 @@ const tripSchema = new mongoose.Schema(
 
 const Trip = mongoose.model("Trip", tripSchema);
 
-module.exports = Trip;
+export default Trip;
