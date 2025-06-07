@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const tripSchema = new mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -13,12 +18,12 @@ const tripSchema = new mongoose.Schema(
       trim: true,
     },
     startDate: {
-      type: String,
+      type: Date,
       required: true,
       trim: true,
     },
     endDate: {
-      type: String,
+      type: Date,
       required: true,
       trim: true,
     },
