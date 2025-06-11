@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/Logo.svg";
 
-export default function Navbar() {
+export default function Navbar({ user, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -62,20 +62,37 @@ export default function Navbar() {
             <NavLink to="/explore" className="hover:text-gray-700">
               Explore
             </NavLink>
-            <NavLink to="/trip" className="hover:text-gray-700">
-              All Trips
+            <NavLink to="/api/trips/" className="hover:text-gray-700">
+              My Trips
             </NavLink>
-            <div className="flex gap-2">
-              <NavLink className="border-2 px-6 py-2 rounded-full" to="/login">
-                Login
-              </NavLink>
-              <NavLink
-                className="!bg-black text-white border-2 px-6 py-2 rounded-full"
-                to="/create"
-              >
-                Create
-              </NavLink>
-            </div>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <NavLink to="/profile" className="hover:text-gray-700">
+                  {user.firstName || user.username || "Profile"}
+                </NavLink>
+                <button
+                  onClick={onLogout}
+                  className="text-red-600 hover:text-red-200 font-semibold"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <NavLink
+                  className="border-2 px-6 py-2 rounded-full"
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  className="!bg-black text-white border-2 px-6 py-2 rounded-full"
+                  to="/signup"
+                >
+                  Create
+                </NavLink>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -94,9 +111,9 @@ export default function Navbar() {
           <li>
             <NavLink
               className="block py-2 px-4 hover:bg-gray-200 rounded"
-              to="/trip"
+              to="/api/trips/"
             >
-              All Trips
+              My Trips
             </NavLink>
           </li>
           <li>
@@ -107,20 +124,45 @@ export default function Navbar() {
               Explore
             </NavLink>
           </li>
-          <li className="flex flex-col gap-2 px-4">
-            <NavLink
-              className="border-2 px-6 py-2 rounded-full text-center"
-              to="/login"
-            >
-              Login
-            </NavLink>
-            <NavLink
-              to="/createuser"
-              className="!bg-black text-white border-2 border-black px-6 py-2 rounded-full text-center"
-            >
-              Create
-            </NavLink>
-          </li>
+
+          {user ? (
+            <>
+              <li>
+                <NavLink
+                  className="block py-2 px-4 hover:bg-gray-200 rounded"
+                  to={`${user.id}/profile`}
+                >
+                  {user.firstName || user.username || "Profile"}
+                </NavLink>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    setIsOpen(false); // close menu on logout
+                    onLogout();
+                  }}
+                  className="block w-full text-left py-2 px-4 hover:bg-gray-200 rounded text-red-600 font-semibold"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <li className="flex flex-col gap-2 px-4">
+              <NavLink
+                className="border-2 px-6 py-2 rounded-full text-center"
+                to="/login"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/signup"
+                className="!bg-black text-white border-2 border-black px-6 py-2 rounded-full text-center"
+              >
+                Create
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

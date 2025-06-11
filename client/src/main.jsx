@@ -5,17 +5,28 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Record from "./components/Record.jsx";
 import RecordList from "./components/RecordList.jsx";
-import "./index.css";
 import Home from "./components/Home.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Signup from "./components/Signup.jsx";
+import Login from "./components/Login.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Home /> }, // default child route for "/"
-      { path: "/trip", element: <RecordList /> }, // path = /record
-      { path: "/trip/edit/:id", element: <Record /> }, // path = /record/edit/:id
-      { path: "/create", element: <Record /> }, // path = /create
+      { index: true, element: <Home /> },
+      { path: "/signup", element: <Signup /> },
+      { path: "/login", element: <Login /> },
+      // Protected routes start here:
+      {
+        element: <ProtectedRoute />, // wraps all these routes
+        children: [
+          { path: "/users/:userId/trip", element: <RecordList /> },
+          { path: "/trip/edit/:id", element: <Record /> },
+          { path: "/create", element: <Record /> },
+        ],
+      },
     ],
   },
 ]);

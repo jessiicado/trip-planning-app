@@ -4,8 +4,8 @@ import Trip from "../models/Trip.js";
 export const getTrips = async (req, res) => {
   try {
     const userId = req.userId;
-    const trip = await Trip.find({ user: userId });
-    res.status(200).json({ success: true, data: trip });
+    const trips = await Trip.find({ user: userId });
+    res.status(200).json({ success: true, data: trips });
   } catch (error) {
     console.log("error in fetching trips.", error.message);
     res.status(500).json({

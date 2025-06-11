@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Trip = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -37,11 +37,11 @@ const Trip = (props) => (
 
 export default function RecordList() {
   const [trips, setTrips] = useState([]);
+  const { userId } = useParams();
 
-  // This method fetches the records from the database.
   useEffect(() => {
     async function getTrips() {
-      const response = await fetch(`http://localhost:5050/trip/`);
+      const response = await fetch(`http://localhost:5050/api/trips/`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         console.error(message);

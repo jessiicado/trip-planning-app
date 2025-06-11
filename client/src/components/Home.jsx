@@ -21,7 +21,7 @@ const Home = () => {
 
           <div className="pt-10 md:mt-20">
             <NavLink
-              to="/createuser"
+              to="/api/auth/signup"
               className="!bg-black text-white border-2 rounded-full font-bold px-5 w-1/3 py-2"
             >
               Join Now
