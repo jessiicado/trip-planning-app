@@ -2,11 +2,10 @@ import Cover from "../assets/Cover.svg";
 import Stock1 from "../assets/stockimg.svg";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/Logo.svg";
-import { useState } from "react";
+// import { useState } from "react";
 import github from "../assets/github-mark.png";
 const Home = () => {
-  const [isFAQ, setisFAQ] = useState(false);
-
+  // const [isFAQ, setisFAQ] = useState(false);
   return (
     <>
       <div className="flex flex-col pt-10 md:flex-row md:pt-0">
@@ -21,7 +20,7 @@ const Home = () => {
 
           <div className="pt-10 md:mt-20">
             <NavLink
-              to="/api/auth/signup"
+              to="/signup"
               className="!bg-black text-white border-2 rounded-full font-bold px-5 w-1/3 py-2"
             >
               Join Now

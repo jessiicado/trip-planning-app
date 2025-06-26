@@ -16,21 +16,22 @@ export const getTrips = async (req, res) => {
 };
 
 export const createTrip = async (req, res) => {
-  const trip = req.body;
+  const userId = req.userId;
+  const { name, destination, startDate, endDate } = req.body;
 
-  if (
-    !trip.user ||
-    !trip.name ||
-    !trip.destination ||
-    !trip.startDate ||
-    !trip.endDate
-  ) {
+  if (!name || !destination || !startDate || !endDate) {
     return res
       .status(400)
       .json({ success: false, message: "Please provide trip details" });
   }
 
-  const newTrip = new Trip(trip);
+  const newTrip = new Trip({
+    user: userId,
+    name,
+    destination,
+    startDate,
+    endDate,
+  });
 
   try {
     await newTrip.save();
@@ -46,15 +47,25 @@ export const createTrip = async (req, res) => {
 
 export const updateTrip = async (req, res) => {
   const { id } = req.params;
-
-  const trip = req.body;
+  const userId = req.userId;
+  const { name, destination, startDate, endDate } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ success: false, message: "Invalid Trip ID" });
   }
 
+  const trip = await Trip.findOne({ _id: id, user: userId });
+
+  if (!trip) {
+    return res.status(403).json({ success: false, message: "Trip not found" });
+  }
+
   try {
-    const updatedTrip = await Trip.findByIdAndUpdate(id, trip, { new: true });
+    const updatedTrip = await Trip.findByIdAndUpdate(
+      id,
+      { name, destination, startDate, endDate },
+      { new: true }
+    );
     res.status(200).json({ success: true, data: updatedTrip });
   } catch (error) {
     res.status(500).json({
@@ -66,13 +77,26 @@ export const updateTrip = async (req, res) => {
 
 export const deleteTrip = async (req, res) => {
   const { id } = req.params;
+  const userId = req.userId;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ success: false, message: "Invalid Trip ID" });
+  }
+
+  const trip = await Trip.findOne({ _id: id, user: userId });
+
+  if (!trip) {
+    return res.status(403).json({ success: false, message: "Trip not found" });
+  }
 
   try {
     await Trip.findByIdAndDelete(id);
-    res.status(200).json({ success: true, message: "Successfully deleted" });
+    res
+      .status(200)
+      .json({ success: true, message: "Trip successfully deleted" });
   } catch (error) {
-    console.log("Error in deleting trip:", error.message);
-    res.status(404).json({
+    console.error("Error in deleting trip:", error.message);
+    res.status(500).json({
       success: false,
       message: "Server error: Error in deleting trip",
     });

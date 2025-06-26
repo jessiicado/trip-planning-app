@@ -7,7 +7,7 @@ export default function Navbar({ user, onLogout }) {
 
   return (
     <nav className="bg-white">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center p-5">
         <NavLink to="/" className="gap-x-5 items-center flex flex-row">
           <img alt="Plannd logo" className="h-16 sm:h-20" src={logo} />
           <h1 className="text-3xl font-bold">Plann'd</h1>
@@ -68,7 +68,7 @@ export default function Navbar({ user, onLogout }) {
             {user ? (
               <div className="flex items-center gap-4">
                 <NavLink to="/profile" className="hover:text-gray-700">
-                  {user.firstName || user.username || "Profile"}
+                  {user.firstName || user.username || "Dashboard"}
                 </NavLink>
                 <button
                   onClick={onLogout}
@@ -130,9 +130,9 @@ export default function Navbar({ user, onLogout }) {
               <li>
                 <NavLink
                   className="block py-2 px-4 hover:bg-gray-200 rounded"
-                  to={`${user.id}/profile`}
+                  to={"/profile"}
                 >
-                  {user.firstName || user.username || "Profile"}
+                  {user.firstName || user.username || "Dashboard"}
                 </NavLink>
               </li>
               <li>

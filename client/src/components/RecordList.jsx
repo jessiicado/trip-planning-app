@@ -56,7 +56,7 @@ export default function RecordList() {
 
   // This method will delete a record
   async function deleteTrips(id) {
-    await fetch(`http://localhost:5050/trip/${id}`, {
+    await fetch(`http://localhost:5050/trips/${id}`, {
       method: "DELETE",
     });
     const newTrips = trips.filter((el) => el._id !== id);
@@ -65,7 +65,7 @@ export default function RecordList() {
 
   // This method will map out the records on the table
   function recordList() {
-    return trips.map((trip) => {
+    return trips.map((trips) => {
       return (
         <Trip
           trip={trips}

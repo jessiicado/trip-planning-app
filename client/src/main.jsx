@@ -9,6 +9,7 @@ import Home from "./components/Home.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Signup from "./components/Signup.jsx";
 import Login from "./components/Login.jsx";
+import Profile from "./components/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/signup", element: <Signup /> },
       { path: "/login", element: <Login /> },
+      { path: "/profile", element: <Profile /> },
       // Protected routes start here:
       {
         element: <ProtectedRoute />, // wraps all these routes
